@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.id_pb_loatdata);
         textView = (TextView) findViewById(R.id.id_tv_data);
     }
-    //Revisar estado de conexion
+    //Metodo para Validad estado de la red
     public Boolean isOnLine(){
         //Obtener el servicio de la conectividad en android
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);//instancia de conne.. y llama al metodo get...
@@ -39,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
 
     //Evento de Boton = cargar Datos
     public void loadData(View view){
-
+        if (isOnLine()){
+            Toast.makeText(this, "Todo ... OK", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "No hay conexion a internet", Toast.LENGTH_SHORT).show();
+        }
     }
 }
