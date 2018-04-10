@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
     //Evento de Boton = cargar Datos
     public void loadData(View view){
         if (isOnLine()){
-            MyTask myTask = new MyTask();
-            myTask.execute();
+            MyTask myTask = new MyTask();//instancio la tarea
+            myTask.execute("https://jsonplaceholder.typicode.com/posts");// ejecuto la tarea
         }else{
             Toast.makeText(this, "No hay conexion a internet", Toast.LENGTH_SHORT).show();
         }
@@ -67,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
         @Override//Mostrar lista de 50 Numeros, no se muestra datos a los componentes
         protected String doInBackground(String... strings) {
             for (int i = 1; i <= 50;i++){
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 publishProgress(String.valueOf(i));//metodo encargado de pasar de un hilo a uno !=
             }
             return "Fin";
